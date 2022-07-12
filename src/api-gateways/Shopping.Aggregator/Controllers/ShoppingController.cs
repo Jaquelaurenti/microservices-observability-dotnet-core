@@ -2,8 +2,6 @@
 using Shopping.Aggregator.Models;
 using Shopping.Aggregator.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -28,25 +26,19 @@ namespace Shopping.Aggregator.Controllers
         [ProducesResponseType(typeof(ShoppingModel), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingModel>> GetShopping(string userName)
         {
-            // get basket with username
-            // iterate basket items and consume products with basket item productId member
-            // map product related members into basketitem dto with extended columns
-            // consume ordering microservices in order to retrieve order list
-            // return root ShoppngModel dto class which including all responses
-
             var basket = await _basketService.GetBasket(userName);
 
             foreach (var item in basket.Items)
             {
                 var product = await _catalogService.GetCatalog(item.ProductId);
 
-                // set additional product fields onto basket item
+                // set additional product fields
                 item.ProductName = product.Name;
                 item.Category = product.Category;
                 item.Summary = product.Summary;
                 item.Description = product.Description;
                 item.ImageFile = product.ImageFile;
-            }
+            }            
 
             var orders = await _orderService.GetOrdersByUserName(userName);
 
@@ -56,8 +48,9 @@ namespace Shopping.Aggregator.Controllers
                 BasketWithProducts = basket,
                 Orders = orders
             };
-
+            
             return Ok(shoppingModel);
         }
+
     }
 }

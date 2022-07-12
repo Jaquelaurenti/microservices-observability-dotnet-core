@@ -9,7 +9,7 @@ namespace Ordering.Infrastructure.Persistence
     public class OrderContextSeed
     {
         public static async Task SeedAsync(OrderContext orderContext, ILogger<OrderContextSeed> logger)
-        {
+        {            
             if (!orderContext.Orders.Any())
             {
                 orderContext.Orders.AddRange(GetPreconfiguredOrders());

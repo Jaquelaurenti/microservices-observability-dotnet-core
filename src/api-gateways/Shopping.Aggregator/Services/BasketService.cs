@@ -19,6 +19,6 @@ namespace Shopping.Aggregator.Services
         {
             var response = await _client.GetAsync($"/api/v1/Basket/{userName}");
             return await response.ReadContentAs<BasketModel>();
-        }
+        }        
     }
 }

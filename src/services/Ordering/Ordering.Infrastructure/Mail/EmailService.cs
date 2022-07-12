@@ -13,9 +13,9 @@ namespace Ordering.Infrastructure.Mail
         public EmailSettings _emailSettings { get; }
         public ILogger<EmailService> _logger { get; }
 
-        public EmailService(IOptions<EmailSettings> emailSettings, ILogger<EmailService> logger)
+        public EmailService(IOptions<EmailSettings> mailSettings, ILogger<EmailService> logger)
         {
-            _emailSettings = emailSettings.Value;
+            _emailSettings = mailSettings.Value;
             _logger = logger;
         }
 
@@ -42,6 +42,7 @@ namespace Ordering.Infrastructure.Mail
                 return true;
 
             _logger.LogError("Email sending failed.");
+
             return false;
         }
     }

@@ -8,5 +8,4 @@ namespace AspnetRunBasics.Services
     {
         Task<IEnumerable<OrderResponseModel>> GetOrdersByUserName(string userName);
     }
-
 }

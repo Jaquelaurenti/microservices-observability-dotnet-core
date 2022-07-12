@@ -1,9 +1,9 @@
-﻿using Catalog.API.Data;
+﻿using Catalog.API.Data.Interfaces;
 using Catalog.API.Entities;
+using Catalog.API.Repositories.Interfaces;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catalog.API.Repositories
@@ -15,7 +15,7 @@ namespace Catalog.API.Repositories
         public ProductRepository(ICatalogContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-        }        
+        }
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
@@ -24,6 +24,7 @@ namespace Catalog.API.Repositories
                             .Find(p => true)
                             .ToListAsync();
         }
+
         public async Task<Product> GetProduct(string id)
         {
             return await _context
@@ -34,7 +35,7 @@ namespace Catalog.API.Repositories
 
         public async Task<IEnumerable<Product>> GetProductByName(string name)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Name, name);
+            FilterDefinition<Product> filter = Builders<Product>.Filter.ElemMatch(p => p.Name, name);
 
             return await _context
                             .Products
@@ -51,6 +52,7 @@ namespace Catalog.API.Repositories
                             .Find(filter)
                             .ToListAsync();
         }
+
 
         public async Task CreateProduct(Product product)
         {
@@ -78,6 +80,5 @@ namespace Catalog.API.Repositories
             return deleteResult.IsAcknowledged
                 && deleteResult.DeletedCount > 0;
         }
-
     }
 }

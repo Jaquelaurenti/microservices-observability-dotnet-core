@@ -45,8 +45,8 @@ namespace AspnetRunBasics
             Order.TotalPrice = Cart.TotalPrice;
 
             await _basketService.CheckoutBasket(Order);
-            
+
             return RedirectToPage("Confirmation", "OrderSubmitted");
-        }       
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AspnetRunBasics.Extensions;
 using AspnetRunBasics.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -9,9 +10,9 @@ namespace AspnetRunBasics.Services
 {
     public class CatalogService : ICatalogService
     {
-        private readonly HttpClient _client;
+        private readonly HttpClient _client;        
 
-        public CatalogService(HttpClient client)
+        public CatalogService(HttpClient client, ILogger<CatalogService> logger)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
@@ -35,7 +36,7 @@ namespace AspnetRunBasics.Services
         }
 
         public async Task<CatalogModel> CreateCatalog(CatalogModel model)
-        {
+        {            
             var response = await _client.PostAsJson($"/Catalog", model);
             if (response.IsSuccessStatusCode)
                 return await response.ReadContentAs<CatalogModel>();
@@ -43,6 +44,6 @@ namespace AspnetRunBasics.Services
             {
                 throw new Exception("Something went wrong when calling api.");
             }
-        }
+        }        
     }
 }

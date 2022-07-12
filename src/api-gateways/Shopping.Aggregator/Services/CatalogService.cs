@@ -32,6 +32,6 @@ namespace Shopping.Aggregator.Services
         {
             var response = await _client.GetAsync($"/api/v1/Catalog/GetProductByCategory/{category}");
             return await response.ReadContentAs<List<CatalogModel>>();
-        }
+        }              
     }
 }

@@ -24,6 +24,6 @@ namespace AspnetRunBasics
             Orders = await _orderService.GetOrdersByUserName("swn");
 
             return Page();
-        }       
+        }
     }
 }
