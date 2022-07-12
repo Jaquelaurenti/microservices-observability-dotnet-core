@@ -1,9 +1,12 @@
 # Microservices Observability with Distributed Logging, Health Monitoring, Resilient and Fault Tolerance with using Polly
 
+### Arquitetura
+<img width="724" alt="image" src="https://user-images.githubusercontent.com/39747516/178605052-8f7d0063-b69c-4022-8512-2bd824c92160.png">
+
+
 
 - Curso:
-- Microservices Observability with Distributed Logging, Health Monitoring, Resilient and Fault Tolerance with using Polly
-
+https://medium.com/aspnetrun/microservices-observability-resilience-monitoring-on-net-a5dfbdbb0fbd
 
 ## Capítulos
 
@@ -60,7 +63,7 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
 1. http://host.docker.internal:8007 - Status da Web.
    
-2. Lhttp://host.docker.internal:8006 Interface do Usuário.
+2. http://host.docker.internal:8006 Interface do Usuário.
 Você pode usar o projeto da Web para **chamar microsserviços pelo API Gateway**. Ao **comprar a cesta**, você pode seguir o **registro da fila no painel do RabbitMQ**.
 
 
